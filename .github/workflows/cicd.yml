@@ -83,6 +83,9 @@ jobs:
       - name: Run tests with Jest and Supertest
         run: npm test -- --coverage
 
+      - name: Debug Coverage Generation
+        run: ls -R coverage || echo "Coverage directory not found"
+
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
