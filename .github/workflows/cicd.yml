@@ -128,12 +128,12 @@ jobs:
         run: ls -R coverage
 
       - name: Debug Coverage Report Content
-        run: cat coverage/lcov-report/index.html | grep 'line-rate'
+        run: cat coverage/lcov-report/index.html
 
       - name: Extract coverage percentage
         id: extract-coverage
         run: |
-          COVERAGE=$(grep -oP 'coverage.*\K[0-9]+(?=%)' coverage/lcov-report/index.html | head -n1)
+          COVERAGE=$(grep -oP '[0-9]+(?=%)' coverage/lcov-report/index.html | head -n1)
           echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
 
       - name: Debug Coverage Value
