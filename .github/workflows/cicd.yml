@@ -139,6 +139,10 @@ jobs:
           sed -i "s|!\[Coverage\](.*)|![Coverage](${COVERAGE_BADGE})|" README.md
           sed -i "s|!\[CI/CD\](.*)|![CI/CD](${CI_BADGE})|" README.md
 
+      - name: Debug Coverage Value
+        run: |
+          echo "Extracted Coverage: $COVERAGE"
+
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
