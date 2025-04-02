@@ -42,9 +42,14 @@ jobs:
           sudo apt-get install -y docker-compose
 
       - name: Copy environment variables
-        run: cp .env.example .env.development
+        run: cp .env.example .env
+
+      - name: Create required Docker network
+        run: docker network create datadog-agent-monitoring || true
 
       - name: Start Docker services
+        env:
+          ENVIRONMENT: development
         run: docker-compose up -d
 
       - name: Wait for API to be ready
