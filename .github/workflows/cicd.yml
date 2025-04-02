@@ -124,9 +124,6 @@ jobs:
         with:
           name: coverage-report
 
-      - name: Debug Coverage Report Path
-        run: ls -R coverage
-
       - name: Debug Coverage Report Content
         run: cat coverage/lcov-report/index.html
 
