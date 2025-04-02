@@ -1,7 +1,7 @@
 # ClassConnect Template Service
 
-![Coverage](https://img.shields.io/badge/Coverage-0%25-brightgreen)
-![CI/CD](https://github.com/memo2-2025-1C-group9/node-template-service/actions/workflows/cicd.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/Coverage-%25-brightgreen)
+![CI/CD](https://github.com/laufrance/test-again/actions/workflows/cicd.yml/badge.svg)
 
 ## Tabla de Contenido
 1. Introduccion
