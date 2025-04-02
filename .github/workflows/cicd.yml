@@ -121,11 +121,21 @@ jobs:
         with:
           name: coverage-report
 
+      - name: Debug Coverage Report Path
+        run: ls -R coverage
+
+      - name: Debug Coverage Report Content
+        run: cat coverage/lcov-report/index.html | grep 'line-rate'
+
       - name: Extract coverage percentage
         id: extract-coverage
         run: |
-          COVERAGE=$(grep -oP 'line-rate="\K[0-9.]+' coverage/lcov-report/index.html | awk '{print $1*100}' | head -n1 | tr -d '\n')
+          COVERAGE=$(grep -oP 'coverage.*\K[0-9]+(?=%)' coverage/lcov-report/index.html | head -n1)
           echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
+
+      - name: Debug Coverage Value
+        run: |
+          echo "Extracted Coverage: $COVERAGE"
 
       - name: Generate badge URLs
         run: |
@@ -139,9 +149,7 @@ jobs:
           sed -i "s|!\[Coverage\](.*)|![Coverage](${COVERAGE_BADGE})|" README.md
           sed -i "s|!\[CI/CD\](.*)|![CI/CD](${CI_BADGE})|" README.md
 
-      - name: Debug Coverage Value
-        run: |
-          echo "Extracted Coverage: $COVERAGE"
+
 
       - name: Commit and push changes
         env:
