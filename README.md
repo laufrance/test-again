@@ -1,6 +1,6 @@
 # ClassConnect Template Service
 
-![Coverage](https://img.shields.io/badge/Coverage-%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen)
 ![CI/CD](https://github.com/laufrance/test-again/actions/workflows/cicd.yml/badge.svg)
 
 ## Tabla de Contenido
