@@ -123,34 +123,36 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-report
-
+          path: coverage/
+    
+      - name: Debug Coverage Report Path
+        run: ls -R coverage || echo "Coverage directory not found"
+    
       - name: Debug Coverage Report Content
-        run: cat coverage/lcov-report/index.html
-
+        run: cat coverage/lcov-report/index.html || echo "index.html not found"
+    
       - name: Extract coverage percentage
         id: extract-coverage
         run: |
           COVERAGE=$(grep -oP '[0-9]+(?=%)' coverage/lcov-report/index.html | head -n1)
           echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
-
+    
       - name: Debug Coverage Value
         run: |
           echo "Extracted Coverage: $COVERAGE"
-
+    
       - name: Generate badge URLs
         run: |
           COVERAGE_BADGE="https://img.shields.io/badge/Coverage-${COVERAGE}%25-brightgreen"
           CI_BADGE="https://github.com/${{ github.repository }}/actions/workflows/cicd.yml/badge.svg"
           echo "COVERAGE_BADGE=$COVERAGE_BADGE" >> $GITHUB_ENV
           echo "CI_BADGE=$CI_BADGE" >> $GITHUB_ENV
-
+    
       - name: Update README with badges
         run: |
           sed -i "s|!\[Coverage\](.*)|![Coverage](${COVERAGE_BADGE})|" README.md
           sed -i "s|!\[CI/CD\](.*)|![CI/CD](${CI_BADGE})|" README.md
-
-
-
+    
       - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
